@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieTracker | Home</title>
+
+    <link rel="shortcut icon" href="images/film-logo.webp" type="image/webp" />
+
+    <!-- Fonts from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header class="home">
+      <a href="../" title="Home">
+        <figure class="logo">
+          <img
+            src="images/film-logo.webp"
+            alt="Film icon. Attributions: https://www.flaticon.es/iconos-gratis/carrete-de-pelicula"
+          />
+          <figcaption>Movie<span class="highlight">Tracker</span></figcaption>
+        </figure>
+      </a>
+
+      <button type="button" title="Watch List" class="wl">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          id="Filled"
+          viewBox="0 0 24 24"
+          width="26"
+          height="26"
+        >
+          <path
+            d="M2.849,23.55a2.954,2.954,0,0,0,3.266-.644L12,17.053l5.885,5.853a2.956,2.956,0,0,0,2.1.881,3.05,3.05,0,0,0,1.17-.237A2.953,2.953,0,0,0,23,20.779V5a5.006,5.006,0,0,0-5-5H6A5.006,5.006,0,0,0,1,5V20.779A2.953,2.953,0,0,0,2.849,23.55Z"
+          />
+        </svg>
+      </button>
+    </header>
+    <main>
+      <section class="hero">
+        <picture>
+          <source
+            media="(min-width: 1024px)"
+            srcset="images/retro-vhs-packaging-indoors-large.webp"
+          />
+          <source
+            media="(min-width: 768px)"
+            srcset="images/retro-vhs-packaging-indoors-medium.webp"
+          />
+          <img
+            src="images/retro-vhs-packaging-indoors.webp"
+            alt="Retro VHS Packaging Indoors"
+          />
+        </picture>
+        <article>
+          <h1>Discover, Track, Enjoy</h1>
+          <a href="">Start My WatchList</a>
+        </article>
+      </section>
+      <section></section>
+    </main>
+    <footer>
+      <p>&copy;2024 Vicente Ferrer</p>
+      <p>WDD 330</p>
+      <p>MovieTracker</p>
+    </footer>
+  </body>
+</html>
