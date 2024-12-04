@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MovieTracker | Home</title>
 
-    <link rel="shortcut icon" href="images/film-logo.png" type="image/png" />
+    <link rel="shortcut icon" href="images/film-logo.webp" type="image/webp" />
 
     <!-- Fonts from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,13 +23,15 @@
   </head>
   <body>
     <header class="home">
-      <figure class="logo">
-        <img
-          src="images/film-logo.png"
-          alt="Film icon. Attributions: https://www.flaticon.es/iconos-gratis/carrete-de-pelicula"
-        />
-        <figcaption>Movie<span class="highlight">Tracker</span></figcaption>
-      </figure>
+      <a href="../" title="Home">
+        <figure class="logo">
+          <img
+            src="images/film-logo.webp"
+            alt="Film icon. Attributions: https://www.flaticon.es/iconos-gratis/carrete-de-pelicula"
+          />
+          <figcaption>Movie<span class="highlight">Tracker</span></figcaption>
+        </figure>
+      </a>
 
       <button type="button" title="Watch List" class="wl">
         <svg
@@ -45,12 +47,31 @@
         </svg>
       </button>
     </header>
-    <main></main>
+    <main>
+      <section class="hero">
+        <picture>
+          <source
+            media="(min-width: 1024px)"
+            srcset="images/retro-vhs-packaging-indoors-large.webp"
+          />
+          <source
+            media="(min-width: 768px)"
+            srcset="images/retro-vhs-packaging-indoors-medium.webp"
+          />
+          <img
+            src="images/retro-vhs-packaging-indoors.webp"
+            alt="Retro VHS Packaging Indoors"
+          />
+        </picture>
+        <article>
+          <h1>Discover, Track, Enjoy</h1>
+          <a href="">Start My WatchList</a>
+        </article>
+      </section>
+      <section></section>
+    </main>
     <footer>
-      <p>
-        &copy;2024<!--<span id="c-year"></span>-->
-        Vicente Ferrer
-      </p>
+      <p>&copy;2024 Vicente Ferrer</p>
       <p>WDD 330</p>
       <p>MovieTracker</p>
     </footer>
