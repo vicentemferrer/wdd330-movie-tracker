@@ -1,0 +1,30 @@
+:root {
+  --title-header-font: 'Poppins', Arial, sans-serif;
+  --body-font: 'Lora', Georgia, serif;
+
+  --primary-color: #1e3a8a;
+  --secondary-color: #d1d5db;
+  --accent1-color: #10b981;
+  --accent2-color: #f97316;
+  --accent3-color: #ffffff;
+
+  --text-in-white: #4b5563;
+  --text-in-color: whitesmoke;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--text-in-white);
+
+  font-family: var(--body-font);
+  font-size: 16px;
+}
+
+/* header img {
+  filter: invert(1) sepia(1) saturate(calc(10 * 1000 * 1000)) hue-rotate(330deg);
+} */
