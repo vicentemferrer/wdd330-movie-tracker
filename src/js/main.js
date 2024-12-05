@@ -1,7 +1,7 @@
-const { VITE_TMDB_API_KEY } = import.meta.env;
+import GenreList from './GenreList.mjs';
+import ExternalServices from './ExternalServices.mjs';
 
-const { genres } = await fetch(
-  `https://api.themoviedb.org/3/genre/movie/list?api_key=${VITE_TMDB_API_KEY}`
-).then((res) => res.json());
+const dataSource = new ExternalServices();
+const genreList = new GenreList('#genres article', dataSource);
 
-console.log(genres);
+genreList.init();
