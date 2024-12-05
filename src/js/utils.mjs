@@ -1,3 +1,7 @@
+function getCYear(selector) {
+  qs(selector).textContent = new Date().getFullYear();
+}
+
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
@@ -34,4 +38,27 @@ export function renderListWithTemplate(template, parent, list) {
   const templateList = list.map(template);
 
   templateList.forEach((element) => parent.appendChild(element));
+}
+
+export function renderWithTemplate(template, parent, data, callback) {
+  parent.insertAdjacentHTML('afterbegin', template);
+
+  if (callback) callback(data);
+}
+
+export async function loadTemplate(path) {
+  const template = await fetch(path).then(convertToText);
+  return template;
+}
+
+export async function loadHeaderFooter(hCb = () => {}, fCb = () => {}) {
+  const headerTemplate = await loadTemplate('../partials/header.html');
+  const headerElement = qs('#header');
+  const footerTemplate = await loadTemplate('../partials/footer.html');
+  const footerElement = qs('#footer');
+
+  renderWithTemplate(headerTemplate, headerElement, '', hCb);
+  renderWithTemplate(footerTemplate, footerElement, '', fCb);
+
+  getCYear('#c-year');
 }
