@@ -1,8 +1,6 @@
-import GenreList from './GenreList.mjs';
-import ExternalServices from './ExternalServices.mjs';
 import { loadHeaderFooter } from './utils.mjs';
+import GenreList from './GenreList.mjs';
 
-const dataSource = new ExternalServices();
-const genreList = new GenreList('#genres article', dataSource);
+const genreList = new GenreList('#list article');
 
 genreList.init(loadHeaderFooter);

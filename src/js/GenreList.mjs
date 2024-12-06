@@ -1,4 +1,5 @@
 import { qs, genreIconName, renderListWithTemplate } from './utils.mjs';
+import ExternalServices from './ExternalServices.mjs';
 
 function genreItemTemplate(genre) {
   const genreTemplate = qs('#genre-template');
@@ -9,7 +10,10 @@ function genreItemTemplate(genre) {
   const iconIMG = qs('img', clone);
   const textFigCap = qs('h3', clone);
 
-  genreAnchor.setAttribute('href', `movie-list/?genre=${genre.id}`);
+  genreAnchor.setAttribute(
+    'href',
+    `movie-list/?genre=${genre.id}&name=${genre.name}`
+  );
   iconIMG.setAttribute(
     'src',
     `images/genres/${genreIconName(genre.name)}.webp`
@@ -21,17 +25,17 @@ function genreItemTemplate(genre) {
 }
 
 export default class GenreList {
-  constructor(parentSelector, dataSource) {
+  constructor(parentSelector) {
     this.parent = qs(parentSelector);
-    this.dataSource = dataSource;
+    this.dataSource = new ExternalServices();
   }
 
   async init(initCb = () => {}, endCb = () => {}) {
     initCb();
 
-    this.list = await this.dataSource.getMovieGenres();
+    const list = await this.dataSource.getMovieGenres();
 
-    renderListWithTemplate(genreItemTemplate, this.parent, this.list);
+    renderListWithTemplate(genreItemTemplate, this.parent, list);
 
     endCb();
   }
