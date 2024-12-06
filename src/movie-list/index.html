@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MovieTracker |</title>
 
-    <link rel="shortcut icon" href="images/film-logo.webp" type="image/webp" />
+    <link
+      rel="shortcut icon"
+      href="../images/film-logo.webp"
+      type="image/webp"
+    />
 
     <!-- Fonts from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,10 +20,10 @@
     />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
 
     <!-- Scripts -->
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/movie-list.js"></script>
   </head>
   <body>
     <header id="header"></header>
@@ -31,7 +35,17 @@
       </section>
     </main>
 
-    <template id="movie-template"> </template>
+    <template id="movie-card-template">
+      <a href="">
+        <figure class="movie-card">
+          <img src="" alt="" loading="lazy" />
+          <figcaption>
+            <h4></h4>
+            <p></p>
+          </figcaption>
+        </figure>
+      </a>
+    </template>
 
     <footer id="footer"></footer>
   </body>

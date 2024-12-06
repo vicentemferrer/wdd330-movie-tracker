@@ -10,6 +10,20 @@ export function qsAll(selector, parent = document) {
   return parent.querySelectorAll(selector);
 }
 
+export function getParams(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+
+  return urlParams.get(param);
+}
+
+export function setPageTitle(param) {
+  const title = getParams(param);
+
+  qs('title', document.head).textContent += ` ${title}`;
+  qs('h2').textContent += ` ${title}`;
+}
+
 export async function convertToJSON(res) {
   try {
     const json = res.json();

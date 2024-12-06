@@ -251,6 +251,44 @@ a:has(.genre):hover img {
   word-break: break-all;
 }
 
+/* Movie List */
+.movie-card {
+  position: relative;
+  aspect-ratio: 2 / 3;
+
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+}
+
+.movie-card figcaption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  position: absolute;
+  padding-inline: 1rem;
+
+  width: 100%;
+  height: 100%;
+
+  font-family: var(--title-header-font);
+  text-align: center;
+
+  color: var(--text-in-color);
+  background-color: color-mix(in srgb, var(--primary-color), transparent 15%);
+
+  transition: transform 500ms ease-in-out;
+}
+
+.movie-card:hover figcaption {
+  transform: translateY(-102%);
+}
+
 /* Footer Styles */
 footer {
   grid-row: 3 / 4;
@@ -279,7 +317,7 @@ footer {
     font-size: 3rem;
   }
 
-  #genres article {
+  #list article {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 
