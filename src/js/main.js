@@ -3,6 +3,6 @@ import ExternalServices from './ExternalServices.mjs';
 import { loadHeaderFooter } from './utils.mjs';
 
 const dataSource = new ExternalServices();
-const genreList = new GenreList('#genres article', dataSource);
+const genreList = new GenreList('#list article', dataSource);
 
 genreList.init(loadHeaderFooter);

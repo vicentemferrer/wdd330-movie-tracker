@@ -200,21 +200,21 @@ section {
 }
 
 /* Genre List */
-#genres {
+#list {
   padding-inline: 1.35rem;
 
   display: flex;
   flex-direction: column;
 }
 
-#genres h2 {
+#list h2 {
   margin-block: 1rem;
 
   font-size: xx-large;
   color: initial;
 }
 
-#genres article {
+#list article {
   align-self: center;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));

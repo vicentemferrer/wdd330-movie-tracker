@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MovieTracker | Home</title>
+    <title>MovieTracker |</title>
 
     <link rel="shortcut icon" href="images/film-logo.webp" type="image/webp" />
 
@@ -22,43 +22,16 @@
     <script type="module" src="js/main.js"></script>
   </head>
   <body>
-    <header class="home" id="header"></header>
+    <header id="header"></header>
 
     <main>
-      <section class="hero">
-        <picture>
-          <source
-            media="(min-width: 1024px)"
-            srcset="images/retro-vhs-packaging-indoors-large.webp"
-          />
-          <source
-            media="(min-width: 768px)"
-            srcset="images/retro-vhs-packaging-indoors-medium.webp"
-          />
-          <img
-            src="images/retro-vhs-packaging-indoors.webp"
-            alt="Retro VHS Packaging Indoors"
-          />
-        </picture>
-        <article>
-          <h1>Discover, Track, Enjoy</h1>
-          <a href="#genres">Start My WatchList</a>
-        </article>
-      </section>
       <section id="list">
-        <h2>Movie Genres</h2>
+        <h2>Top Movies:</h2>
         <article></article>
       </section>
     </main>
 
-    <template id="genre-template">
-      <a href="">
-        <figure class="genre">
-          <img src="" alt="" />
-          <figcaption><h3></h3></figcaption>
-        </figure>
-      </a>
-    </template>
+    <template id="movie-template"> </template>
 
     <footer id="footer"></footer>
   </body>
