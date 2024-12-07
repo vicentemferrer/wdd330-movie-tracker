@@ -261,6 +261,7 @@ a:has(.genre):hover img {
 
 .movie-card img {
   width: 100%;
+  aspect-ratio: 2 / 3;
 }
 
 .movie-card figcaption {

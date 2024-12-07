@@ -1,7 +1,33 @@
-import { qs, renderListWithTemplate, setPageTitle } from './utils.mjs';
+import {
+  qs,
+  renderListWithTemplate,
+  setPageTitle,
+  loadImage
+} from './utils.mjs';
 import ExternalServices from './ExternalServices.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
+
+async function filterMovieList(list, key) {
+  const moviePromises = list.map(async (movie) => {
+    const width = 'w300';
+    const path = `${VITE_TMDB_IMG}/${width}${movie[key]}`;
+
+    try {
+      await loadImage(path);
+      return movie;
+    } catch (err) {
+      console.error(err.message);
+      return null;
+    }
+  });
+
+  const movieList = await Promise.allSettled(moviePromises);
+
+  return movieList
+    .filter(({ status, value }) => status === 'fulfilled' && value !== null)
+    .map((movie) => movie.value);
+}
 
 function movieCardTemplate(movie) {
   const cardTemplate = qs('#movie-card-template');
@@ -39,8 +65,12 @@ export default class MovieList {
 
     const list = await this.dataSource.getMovieList(this.genreID);
 
-    renderListWithTemplate(movieCardTemplate, this.parent, list);
+    this.#renderList(await filterMovieList(list, 'poster_path'));
 
     endCb();
+  }
+
+  #renderList(list) {
+    renderListWithTemplate(movieCardTemplate, this.parent, list);
   }
 }
