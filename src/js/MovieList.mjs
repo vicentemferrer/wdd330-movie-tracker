@@ -1,10 +1,5 @@
-import {
-  qs,
-  renderListWithTemplate,
-  setPageTitle,
-  loadImage
-} from './utils.mjs';
-import ExternalServices from './ExternalServices.mjs';
+import RenderPage from './RenderPage.mjs';
+import { qs, renderListWithTemplate, loadImage } from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
 
@@ -52,22 +47,16 @@ function movieCardTemplate(movie) {
   return clone;
 }
 
-export default class MovieList {
+export default class MovieList extends RenderPage {
   constructor(parentSelector, genreID) {
-    this.parent = qs(parentSelector);
+    super(parentSelector);
     this.genreID = genreID;
-    this.dataSource = new ExternalServices();
   }
 
-  async init(initCb = () => {}, endCb = () => {}) {
-    initCb();
-    setPageTitle('name');
-
+  async render() {
     const list = await this.dataSource.getMovieList(this.genreID);
 
     this.#renderList(await filterMovieList(list, 'poster_path'));
-
-    endCb();
   }
 
   #renderList(list) {

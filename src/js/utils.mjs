@@ -1,4 +1,4 @@
-function getCYear(selector) {
+export function getCYear(selector) {
   qs(selector).textContent = new Date().getFullYear();
 }
 
@@ -17,11 +17,9 @@ export function getParams(param) {
   return urlParams.get(param);
 }
 
-export function setPageTitle(param) {
-  const title = getParams(param);
-
-  qs('title', document.head).textContent += ` ${title}`;
-  qs('h2').textContent += ` ${title}`;
+export function setPageTitle(title) {
+  qs('title', document.head).textContent += title;
+  qs('h2').textContent += title;
 }
 
 export async function convertToJSON(res) {
@@ -63,18 +61,6 @@ export function renderWithTemplate(template, parent, data, callback) {
 export async function loadTemplate(path) {
   const template = await fetch(path).then(convertToText);
   return template;
-}
-
-export async function loadHeaderFooter(hCb = () => {}, fCb = () => {}) {
-  const headerTemplate = await loadTemplate('../partials/header.html');
-  const headerElement = qs('#header');
-  const footerTemplate = await loadTemplate('../partials/footer.html');
-  const footerElement = qs('#footer');
-
-  renderWithTemplate(headerTemplate, headerElement, '', hCb);
-  renderWithTemplate(footerTemplate, footerElement, '', fCb);
-
-  getCYear('#c-year');
 }
 
 export function loadImage(url) {
