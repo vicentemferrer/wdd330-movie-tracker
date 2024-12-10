@@ -1,5 +1,5 @@
+import RenderPage from './RenderPage.mjs';
 import { qs, genreIconName, renderListWithTemplate } from './utils.mjs';
-import ExternalServices from './ExternalServices.mjs';
 
 function genreItemTemplate(genre) {
   const genreTemplate = qs('#genre-template');
@@ -24,19 +24,14 @@ function genreItemTemplate(genre) {
   return clone;
 }
 
-export default class GenreList {
+export default class GenreList extends RenderPage {
   constructor(parentSelector) {
-    this.parent = qs(parentSelector);
-    this.dataSource = new ExternalServices();
+    super(parentSelector);
   }
 
-  async init(initCb = () => {}, endCb = () => {}) {
-    initCb();
-
+  async render() {
     const list = await this.dataSource.getMovieGenres();
 
     renderListWithTemplate(genreItemTemplate, this.parent, list);
-
-    endCb();
   }
 }
