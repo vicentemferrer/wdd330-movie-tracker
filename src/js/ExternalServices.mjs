@@ -4,9 +4,7 @@ const { VITE_TMDB_KEY, VITE_TMDB_URL } = import.meta.env;
 
 export default class ExternalServices {
   async getMovieGenres() {
-    const res = await fetch(
-      `${VITE_TMDB_URL}/3/genre/movie/list?api_key=${VITE_TMDB_KEY}`
-    );
+    const res = await fetch(`${VITE_TMDB_URL}/3/genre/movie/list?api_key=${VITE_TMDB_KEY}`);
     const { genres } = await convertToJSON(res);
 
     return genres;
@@ -22,9 +20,7 @@ export default class ExternalServices {
   }
 
   async getMovie(movieID) {
-    const res = await fetch(
-      `${VITE_TMDB_URL}/3/movie/${movieID}?api_key=${VITE_TMDB_KEY}`
-    );
+    const res = await fetch(`${VITE_TMDB_URL}/3/movie/${movieID}?api_key=${VITE_TMDB_KEY}`);
     const movie = await convertToJSON(res);
 
     return movie;

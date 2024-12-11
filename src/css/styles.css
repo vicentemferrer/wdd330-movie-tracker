@@ -96,8 +96,8 @@ header .logo img {
 }
 
 header .logo img {
-  filter: invert(1) sepia(1) saturate(calc(10 * 1000 * 1000)) contrast(4)
-    brightness(0.65) hue-rotate(305deg);
+  filter: invert(1) sepia(1) saturate(calc(10 * 1000 * 1000)) contrast(4) brightness(0.65)
+    hue-rotate(305deg);
 }
 
 header figcaption .highlight {
@@ -105,12 +105,14 @@ header figcaption .highlight {
 }
 
 header .wl {
+  position: relative;
+
   border: 0;
   background-color: transparent;
 
   --svg-width: 21;
-  --svg-color: black;
-  --mix-color: var(--text-in-color);
+  --svg-color: var(--accent2-color);
+  --mix-color: orangered;
 }
 
 header .wl svg {
@@ -119,6 +121,25 @@ header .wl svg {
 
 header .wl:hover svg {
   fill: color-mix(in srgb, var(--svg-color), var(--mix-color));
+}
+
+header .wl span {
+  position: absolute;
+  top: -0.5rem;
+  right: 0;
+
+  padding: 0.015rem 0.1rem;
+  border-radius: 0.25rem;
+
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+
+  background-color: var(--accent1-color);
+}
+
+header .wl span.hide {
+  display: none;
 }
 
 /* Home Variant */
@@ -252,8 +273,7 @@ a:has(.genre):hover img {
 
 .genre img {
   width: 80%;
-  filter: invert(0.5) sepia(0.5) saturate(2) contrast(1.2) brightness(0.8)
-    hue-rotate(180deg);
+  filter: invert(0.5) sepia(0.5) saturate(2) contrast(1.2) brightness(0.8) hue-rotate(180deg);
 }
 
 .genre figcaption {
@@ -355,9 +375,42 @@ a:has(.genre):hover img {
   border-radius: 2rem;
 
   background-color: transparent;
-  border: 2px solid black;
+  border: 1px solid var(--dark-tone);
 
   --svg-width: 18;
+}
+
+#movie button svg.rmv {
+  display: none;
+}
+
+#movie button.added:not(.added.fav):hover svg:not(.rmv) {
+  display: none;
+}
+
+#movie button.added:hover svg.rmv {
+  display: block;
+}
+
+#movie #btnWatchlist.added {
+  background-color: color-mix(in srgb, lightgreen, var(--dark-tone));
+}
+
+#movie #btnWatchlist:hover {
+  background-color: color-mix(in srgb, transparent, var(--dark-tone));
+}
+
+#movie #btnWatchlist.added:hover {
+  background-color: color-mix(in srgb, red, var(--dark-tone));
+}
+
+#movie #btnFavorite:hover {
+  background-color: palevioletred;
+}
+
+#movie #btnWatchlist.added svg,
+#movie #btnFavorite:hover svg {
+  fill: var(--accent3-color);
 }
 
 /* Footer Styles */

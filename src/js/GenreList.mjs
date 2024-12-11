@@ -10,14 +10,8 @@ function genreItemTemplate(genre) {
   const iconIMG = qs('img', clone);
   const textFigCap = qs('h3', clone);
 
-  genreAnchor.setAttribute(
-    'href',
-    `movie-list/?genre=${genre.id}&name=${genre.name}`
-  );
-  iconIMG.setAttribute(
-    'src',
-    `images/genres/${genreIconName(genre.name)}.webp`
-  );
+  genreAnchor.setAttribute('href', `movie-list/?genre=${genre.id}&name=${genre.name}`);
+  iconIMG.setAttribute('src', `images/genres/${genreIconName(genre.name)}.webp`);
   iconIMG.setAttribute('alt', `${genre.name} icon`);
   textFigCap.textContent = genre.name;
 

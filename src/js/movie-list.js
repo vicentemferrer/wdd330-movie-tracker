@@ -7,4 +7,4 @@ const title = ' ' + getParams('name');
 
 const movieList = new MovieList('#list article', genreID);
 
-movieList.init(true, title);
+movieList.init({ isDynamic: true, title });

@@ -5,4 +5,4 @@ const movieID = getParams('id');
 
 const movie = new Movie('#movie', movieID);
 
-movie.init(true);
+movie.init({ isDynamic: true });

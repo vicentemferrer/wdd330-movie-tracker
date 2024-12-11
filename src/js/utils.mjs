@@ -10,6 +10,18 @@ export function qsAll(selector, parent = document) {
   return parent.querySelectorAll(selector);
 }
 
+export function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
+export function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+export function simplifyMovie({ id, title, poster_path }) {
+  return { id, title, poster_path };
+}
+
 export function getParams(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -52,13 +64,7 @@ export function renderListWithTemplate(template, parent, list) {
   templateList.forEach((element) => parent.appendChild(element));
 }
 
-export function renderWithTemplate(
-  template,
-  parent,
-  position = 'afterbegin',
-  callback,
-  data
-) {
+export function renderWithTemplate(template, parent, position = 'afterbegin', callback, data) {
   parent.insertAdjacentHTML(position, template);
 
   if (callback) callback(data);
@@ -76,4 +82,8 @@ export function loadImage(url) {
     img.onerror = () => reject(false);
     img.src = url;
   });
+}
+
+export function checkVoidArr(arr) {
+  return arr.length === 0;
 }
