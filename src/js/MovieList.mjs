@@ -1,5 +1,10 @@
 import RenderPage from './RenderPage.mjs';
-import { qs, renderListWithTemplate, loadImage } from './utils.mjs';
+import {
+  qs,
+  renderListWithTemplate,
+  loadImage,
+  setPageTitle
+} from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
 
@@ -53,10 +58,16 @@ export default class MovieList extends RenderPage {
     this.genreID = genreID;
   }
 
-  async render() {
-    const list = await this.dataSource.getMovieList(this.genreID);
+  async load() {
+    this.list = await this.dataSource.getMovieList(this.genreID);
+  }
 
-    this.#renderList(await filterMovieList(list, 'poster_path'));
+  async render() {
+    this.#renderList(await filterMovieList(this.list, 'poster_path'));
+  }
+
+  renderTitle(title) {
+    setPageTitle(title);
   }
 
   #renderList(list) {

@@ -29,9 +29,11 @@ export default class GenreList extends RenderPage {
     super(parentSelector);
   }
 
-  async render() {
-    const list = await this.dataSource.getMovieGenres();
+  async load() {
+    this.list = await this.dataSource.getMovieGenres();
+  }
 
-    renderListWithTemplate(genreItemTemplate, this.parent, list);
+  async render() {
+    renderListWithTemplate(genreItemTemplate, this.parent, this.list);
   }
 }

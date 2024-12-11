@@ -18,7 +18,7 @@ export function getParams(param) {
 }
 
 export function setPageTitle(title) {
-  qs('title', document.head).textContent += title;
+  qs('title', document.head).textContent = 'MovieTracker | ' + title.trim();
   qs('h2').textContent += title;
 }
 
@@ -52,8 +52,14 @@ export function renderListWithTemplate(template, parent, list) {
   templateList.forEach((element) => parent.appendChild(element));
 }
 
-export function renderWithTemplate(template, parent, data, callback) {
-  parent.insertAdjacentHTML('afterbegin', template);
+export function renderWithTemplate(
+  template,
+  parent,
+  position = 'afterbegin',
+  callback,
+  data
+) {
+  parent.insertAdjacentHTML(position, template);
 
   if (callback) callback(data);
 }

@@ -1,11 +1,5 @@
 import ExternalServices from './ExternalServices.mjs';
-import {
-  loadTemplate,
-  qs,
-  renderWithTemplate,
-  getCYear,
-  setPageTitle
-} from './utils.mjs';
+import { loadTemplate, qs, renderWithTemplate, getCYear } from './utils.mjs';
 
 export default class RenderPage {
   constructor(parentSelector) {
@@ -19,7 +13,8 @@ export default class RenderPage {
 
   async init(isDynamic = false, title = '') {
     this.loadHeaderFooter();
-    if (isDynamic) setPageTitle(title);
+    await this.load();
+    if (isDynamic) this.renderTitle(title);
     this.render();
   }
 
@@ -35,7 +30,16 @@ export default class RenderPage {
     getCYear('#c-year');
   }
 
+  async load() {
+    throw new Error('load() must be implemented.');
+  }
+
   async render() {
     throw new Error('render() must be implemented.');
+  }
+
+  renderTitle(title) {
+    console.log(title);
+    throw new Error('renderTitle() must be implemented.');
   }
 }
