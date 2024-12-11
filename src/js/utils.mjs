@@ -1,4 +1,4 @@
-function getCYear(selector) {
+export function getCYear(selector) {
   qs(selector).textContent = new Date().getFullYear();
 }
 
@@ -10,6 +10,18 @@ export function qsAll(selector, parent = document) {
   return parent.querySelectorAll(selector);
 }
 
+export function getLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
+export function setLocalStorage(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+export function simplifyMovie({ id, title, poster_path }) {
+  return { id, title, poster_path };
+}
+
 export function getParams(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -17,11 +29,9 @@ export function getParams(param) {
   return urlParams.get(param);
 }
 
-export function setPageTitle(param) {
-  const title = getParams(param);
-
-  qs('title', document.head).textContent += ` ${title}`;
-  qs('h2').textContent += ` ${title}`;
+export function setPageTitle(title) {
+  qs('title', document.head).textContent = 'MovieTracker | ' + title.trim();
+  qs('h2').textContent += title;
 }
 
 export async function convertToJSON(res) {
@@ -54,8 +64,8 @@ export function renderListWithTemplate(template, parent, list) {
   templateList.forEach((element) => parent.appendChild(element));
 }
 
-export function renderWithTemplate(template, parent, data, callback) {
-  parent.insertAdjacentHTML('afterbegin', template);
+export function renderWithTemplate(template, parent, position = 'afterbegin', callback, data) {
+  parent.insertAdjacentHTML(position, template);
 
   if (callback) callback(data);
 }
@@ -65,18 +75,6 @@ export async function loadTemplate(path) {
   return template;
 }
 
-export async function loadHeaderFooter(hCb = () => {}, fCb = () => {}) {
-  const headerTemplate = await loadTemplate('../partials/header.html');
-  const headerElement = qs('#header');
-  const footerTemplate = await loadTemplate('../partials/footer.html');
-  const footerElement = qs('#footer');
-
-  renderWithTemplate(headerTemplate, headerElement, '', hCb);
-  renderWithTemplate(footerTemplate, footerElement, '', fCb);
-
-  getCYear('#c-year');
-}
-
 export function loadImage(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -84,4 +82,8 @@ export function loadImage(url) {
     img.onerror = () => reject(false);
     img.src = url;
   });
+}
+
+export function checkVoidArr(arr) {
+  return arr.length === 0;
 }

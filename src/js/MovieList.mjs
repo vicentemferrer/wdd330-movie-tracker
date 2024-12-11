@@ -1,10 +1,5 @@
-import {
-  qs,
-  renderListWithTemplate,
-  setPageTitle,
-  loadImage
-} from './utils.mjs';
-import ExternalServices from './ExternalServices.mjs';
+import RenderPage from './RenderPage.mjs';
+import { qs, renderListWithTemplate, loadImage, setPageTitle } from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
 
@@ -41,10 +36,7 @@ function movieCardTemplate(movie) {
   const moviePara = qs('p', clone);
 
   movieAnchor.setAttribute('href', `../movie/?id=${movie.id}`);
-  movieIMG.setAttribute(
-    'src',
-    `${VITE_TMDB_IMG}/${width}${movie['poster_path']}`
-  );
+  movieIMG.setAttribute('src', `${VITE_TMDB_IMG}/${width}${movie['poster_path']}`);
   movieIMG.setAttribute('alt', `${movie.title} poster`);
   movieH4.textContent = movie.title;
   moviePara.textContent = new Date(movie['release_date']).getFullYear();
@@ -52,22 +44,22 @@ function movieCardTemplate(movie) {
   return clone;
 }
 
-export default class MovieList {
+export default class MovieList extends RenderPage {
   constructor(parentSelector, genreID) {
-    this.parent = qs(parentSelector);
+    super(parentSelector);
     this.genreID = genreID;
-    this.dataSource = new ExternalServices();
   }
 
-  async init(initCb = () => {}, endCb = () => {}) {
-    initCb();
-    setPageTitle('name');
+  async load() {
+    this.list = await this.dataSource.getMovieList(this.genreID);
+  }
 
-    const list = await this.dataSource.getMovieList(this.genreID);
+  async render() {
+    this.#renderList(await filterMovieList(this.list, 'poster_path'));
+  }
 
-    this.#renderList(await filterMovieList(list, 'poster_path'));
-
-    endCb();
+  renderTitle(title) {
+    setPageTitle(title);
   }
 
   #renderList(list) {
