@@ -1,4 +1,4 @@
-import RenderPage from './RenderPage.mjs';
+import RenderContent from './RenderContent.mjs';
 import { qs, renderWithTemplate, setPageTitle } from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
@@ -74,7 +74,7 @@ function favoriteManager(e) {
   this.init({ isDynamic: true, reset: true });
 }
 
-export default class Movie extends RenderPage {
+export default class Movie extends RenderContent {
   constructor(parentSelector, movieID) {
     super(parentSelector);
     this.movieID = movieID;
@@ -105,7 +105,7 @@ export default class Movie extends RenderPage {
 
   reset() {
     document.body.innerHTML = `
-      <header id="header"></header>
+      <header class="divider" id="header"></header>
 
       <main>
         <section id="movie">

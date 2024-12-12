@@ -2,9 +2,9 @@ import ExternalServices from './ExternalServices.mjs';
 import MovieStorageManager from './MovieStorageManager.mjs';
 import { loadTemplate, qs, renderWithTemplate, getCYear } from './utils.mjs';
 
-export default class RenderPage {
+export default class RenderContent {
   constructor(parentSelector) {
-    if (new.target === RenderPage) {
+    if (new.target === RenderContent) {
       throw new Error('Cannot instantiate RenderPage class.');
     }
 

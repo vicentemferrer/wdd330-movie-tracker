@@ -1,4 +1,4 @@
-import RenderPage from './RenderPage.mjs';
+import RenderContent from './RenderContent.mjs';
 import { qs, renderListWithTemplate, loadImage, setPageTitle } from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
@@ -44,7 +44,7 @@ function movieCardTemplate(movie) {
   return clone;
 }
 
-export default class MovieList extends RenderPage {
+export default class MovieList extends RenderContent {
   constructor(parentSelector, genreID) {
     super(parentSelector);
     this.genreID = genreID;

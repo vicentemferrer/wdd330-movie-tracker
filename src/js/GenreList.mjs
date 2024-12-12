@@ -1,4 +1,4 @@
-import RenderPage from './RenderPage.mjs';
+import RenderContent from './RenderContent.mjs';
 import { qs, genreIconName, renderListWithTemplate } from './utils.mjs';
 
 function genreItemTemplate(genre) {
@@ -18,7 +18,7 @@ function genreItemTemplate(genre) {
   return clone;
 }
 
-export default class GenreList extends RenderPage {
+export default class GenreList extends RenderContent {
   constructor(parentSelector) {
     super(parentSelector);
   }
