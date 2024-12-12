@@ -3,6 +3,6 @@ import Movie from './Movie.mjs';
 
 const movieID = getParams('id');
 
-const movie = new Movie('#movie', movieID);
+const movie = new Movie('.movie', movieID);
 
 movie.init({ isDynamic: true });

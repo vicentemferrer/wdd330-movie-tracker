@@ -19,7 +19,7 @@ export default class RenderContent {
     this.loadHeaderFooter();
     await this.load();
     if (isDynamic) this.renderTitle(title);
-    this.render();
+    await this.render();
   }
 
   async loadHeaderFooter() {

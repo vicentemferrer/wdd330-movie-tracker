@@ -144,20 +144,32 @@ header .wl span.hide {
 }
 
 /* Watchlist Overview Styles */
-#watchlist {
+#overview {
+  width: 100%;
+  max-width: 300px;
   height: 100%;
   margin-inline: auto 0;
 
   display: flex;
   flex-direction: column;
 
+  color: var(--text-in-color);
+  background-color: color-mix(in srgb, var(--primary-color), black);
+
   border: 0;
 
   transform: translateX(100%);
   transition: transform 500ms ease-in-out;
+
+  z-index: 1;
 }
 
-#watchlist:popover-open {
+#overview::backdrop {
+  background-color: color-mix(in srgb, black, transparent);
+  transition: background-color 500ms ease-in-out;
+}
+
+#overview:popover-open {
   transform: translateX(0);
 }
 
@@ -341,7 +353,7 @@ a:has(.genre):hover img {
 }
 
 /* Movie Styles */
-#movie {
+.movie {
   display: grid;
   grid-template-columns: auto 1fr auto;
   justify-items: center;
@@ -351,22 +363,22 @@ a:has(.genre):hover img {
   --divisor-width: 1.25;
 }
 
-#movie > * {
+.movie > * {
   grid-column: 2 / 3;
 }
 
-#movie h2 {
+.movie h2 {
   text-align: center;
   margin-bottom: 0;
 }
 
-#movie h3 {
+.movie h3 {
   margin-bottom: 0.5rem;
 
   font-size: x-large;
 }
 
-#movie figure {
+.movie figure {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -375,20 +387,20 @@ a:has(.genre):hover img {
   width: calc(var(--poster-width) / var(--divisor-width));
 }
 
-#movie figure picture,
-#movie figure img {
+.movie figure picture,
+.movie figure img {
   width: 100%;
   height: auto;
 }
 
-#movie figcaption {
+.movie figcaption {
   align-self: stretch;
 
   display: flex;
   justify-content: space-between;
 }
 
-#movie button {
+.movie button {
   padding: 0.25rem 2rem;
 
   border-radius: 2rem;
@@ -399,36 +411,36 @@ a:has(.genre):hover img {
   --svg-width: 18;
 }
 
-#movie button svg.rmv {
+.movie button svg.rmv {
   display: none;
 }
 
-#movie button.added:not(.added.fav):hover svg:not(.rmv) {
+button.added:not(.added.fav):hover svg:not(.rmv) {
   display: none;
 }
 
-#movie button.added:hover svg.rmv {
+button.added:hover svg.rmv {
   display: block;
 }
 
-#movie #btnWatchlist.added {
+.btnWatchlist.added {
   background-color: color-mix(in srgb, lightgreen, var(--dark-tone));
 }
 
-#movie #btnWatchlist:hover {
+.btnWatchlist:hover {
   background-color: color-mix(in srgb, transparent, var(--dark-tone));
 }
 
-#movie #btnWatchlist.added:hover {
+.btnWatchlist.added:hover {
   background-color: color-mix(in srgb, red, var(--dark-tone));
 }
 
-#movie #btnFavorite:hover {
+.btnFavorite:hover {
   background-color: palevioletred;
 }
 
-#movie #btnWatchlist.added svg,
-#movie #btnFavorite:hover svg {
+.btnWatchlist.added svg,
+.btnFavorite:hover svg {
   fill: var(--accent3-color);
 }
 
@@ -439,6 +451,12 @@ footer {
   flex-direction: column;
 
   padding-block: 1rem;
+}
+
+@starting-style {
+  #overview::backdrop {
+    background-color: transparent;
+  }
 }
 
 @media (min-width: 768px) {
@@ -464,7 +482,7 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 
-  #movie {
+  .movie {
     display: grid;
     grid-template-columns: 1fr 1fr 1.25fr 1fr;
     grid-auto-rows: min-content;
@@ -474,18 +492,18 @@ footer {
     --divisor-width: 2;
   }
 
-  #movie h2,
-  #movie article {
+  .movie h2,
+  .movie article {
     grid-column: 3 / 4;
 
     justify-self: start;
   }
 
-  #movie h2 {
+  .movie h2 {
     text-align: left;
   }
 
-  #movie figure {
+  .movie figure {
     grid-row: 1 / 4;
 
     margin-top: 1rem;
@@ -515,5 +533,9 @@ footer {
 
   header .wl {
     --svg-width: 18;
+  }
+
+  #overview {
+    max-width: 500px;
   }
 }
