@@ -7,7 +7,6 @@ import {
   markAsFavoriteSVG,
   isFavoriteSVG
 } from './components/SVGs.mjs';
-import { watchlistManager, favoriteManager } from './interactions.mjs';
 import { qsAll, renderWithTemplate, setPageTitle } from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
@@ -50,10 +49,30 @@ function movieTemplate(movie, inWatchlist, inFavorite) {
   return template;
 }
 
+function watchlistManager(e) {
+  if (e.currentTarget.classList.contains('added')) {
+    this.store.removeFromWatchlist(this.movieID);
+  } else {
+    this.store.addToWatchlist(this.movie);
+  }
+
+  this.init({ isDynamic: true, reset: true });
+}
+
+function favoriteManager(e) {
+  if (e.currentTarget.classList.contains('added')) {
+    this.store.quitFromFavorite(this.movieID);
+  } else {
+    this.store.markAsFavorite(this.movie);
+  }
+  this.init({ isDynamic: true, reset: true });
+}
+
 export default class Movie extends RenderContent {
-  constructor(parentSelector, movieID) {
+  constructor(parentSelector, movieID, resetStructure) {
     super(parentSelector);
     this.movieID = movieID;
+    this.resetStructure = resetStructure;
   }
 
   async load() {
@@ -85,17 +104,7 @@ export default class Movie extends RenderContent {
   }
 
   reset() {
-    document.body.innerHTML = `
-      <header class="divider" id="header"></header>
-
-      <main>
-        <section class="movie">
-          <h2></h2>
-        </section>
-      </main>
-
-      <footer id="footer"></footer>
-    `;
+    document.body.innerHTML = this.resetStructure;
 
     this._setParent();
   }

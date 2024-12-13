@@ -7,12 +7,11 @@ import {
   markAsFavoriteSVG,
   isFavoriteSVG
 } from './components/SVGs.mjs';
-import { watchlistManager, favoriteManager } from './interactions.mjs';
 import { qsAll, renderListWithTextTemplate } from './utils.mjs';
 
 const { VITE_TMDB_IMG } = import.meta.env;
 
-function movieWatchlistCard(movie) {
+function movieWatchlistCard(movie, i) {
   const wlIntOpt = {
     condition: this.store.inWatchlist(movie.id),
     interactionType: 'watchlist',
@@ -31,10 +30,10 @@ function movieWatchlistCard(movie) {
   };
 
   const template = `
-    <li>
+    <li data-position="${i}" data-id="${movie.id}" class="movie">
       <img src="${VITE_TMDB_IMG}/w300${movie['poster_path']}" alt="${movie.title} poster" loading="lazy">
       <div>
-        <h4>${movie.title}</h4>
+        <a href="../movie/?id=${movie.id}"><h3>${movie.title}</h3></a>
         <p>
           ${InteractionButton(wlIntOpt).outerHTML}
           ${InteractionButton(fvIntOpt).outerHTML}
@@ -46,9 +45,36 @@ function movieWatchlistCard(movie) {
   return template;
 }
 
+function renderOnVoid(message) {
+  return `
+  <p class="void-list">${message}</p>
+  `;
+}
+
+function removeMovie(e) {
+  const li = e.currentTarget.parentElement.parentElement.parentElement;
+
+  this.store.removeFromWatchlist(li.dataset.id);
+
+  this.init({ reset: true });
+}
+
+function favoriteManager(e) {
+  const li = e.currentTarget.parentElement.parentElement.parentElement;
+
+  if (e.currentTarget.classList.contains('added')) {
+    this.store.quitFromFavorite(li.dataset.id);
+  } else {
+    const moviePosition = parseInt(li.dataset.position);
+    this.store.markAsFavorite(this.list[moviePosition]);
+  }
+  this.init({ reset: true });
+}
+
 export default class Watchlist extends RenderContent {
-  constructor(parentSelector) {
+  constructor(parentSelector, resetStructure) {
     super(parentSelector);
+    this.resetStructure = resetStructure;
   }
 
   async load() {
@@ -64,12 +90,22 @@ export default class Watchlist extends RenderContent {
       true
     );
 
+    if (this.parent.innerHTML === '') {
+      this.parent.innerHTML = renderOnVoid('Your watchlist is empty. Time to start a new one!');
+    }
+
     Array.from(qsAll('.btnWatchlist')).forEach((button) => {
-      button.addEventListener('click', watchlistManager.bind(this));
+      button.addEventListener('click', removeMovie.bind(this));
     });
 
     Array.from(qsAll('.btnFavorite')).forEach((button) => {
       button.addEventListener('click', favoriteManager.bind(this));
     });
+  }
+
+  reset() {
+    document.body.innerHTML = this.resetStructure;
+
+    this._setParent();
   }
 }

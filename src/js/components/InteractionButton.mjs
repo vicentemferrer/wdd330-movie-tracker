@@ -20,7 +20,7 @@ export default function InteractionButton({
 
   btn.setAttribute('type', btnType);
   btn.setAttribute('title', title);
-  btn.setAttribute('class', btnClasses + ' ' + id);
+  btn.setAttribute('class', 'interaction ' + btnClasses + ' ' + id);
 
   btn.innerHTML = firstSVG + secSVG;
 
