@@ -57,6 +57,22 @@ svg {
   border-bottom: 3px solid var(--accent2-color);
 }
 
+.action {
+  padding: 1rem;
+
+  border-radius: 0.5rem;
+
+  color: var(--action-color);
+  background-color: var(--action-bg-color);
+
+  font-family: var(--title-header-font);
+  font-weight: bold;
+}
+
+.action:hover {
+  background-color: color-mix(in srgb, var(--action-bg-color), var(--action-hv-mix));
+}
+
 /* Structural Arrange */
 header,
 footer {
@@ -143,36 +159,6 @@ header .wl span.hide {
   display: none;
 }
 
-/* Watchlist Overview Styles */
-#overview {
-  width: 100%;
-  max-width: 300px;
-  height: 100%;
-  margin-inline: auto 0;
-
-  display: flex;
-  flex-direction: column;
-
-  color: var(--text-in-color);
-  background-color: color-mix(in srgb, var(--primary-color), black);
-
-  border: 0;
-
-  transform: translateX(100%);
-  transition: transform 500ms ease-in-out;
-
-  z-index: 1;
-}
-
-#overview::backdrop {
-  background-color: color-mix(in srgb, black, transparent);
-  transition: background-color 500ms ease-in-out;
-}
-
-#overview:popover-open {
-  transform: translateX(0);
-}
-
 /* Home Variant */
 .home {
   color: var(--text-in-color);
@@ -240,6 +226,10 @@ h2 {
   background: linear-gradient(var(--primary-color), transparent);
 
   z-index: 0;
+
+  --action-color: var(--text-in-color);
+  --action-bg-color: var(--accent1-color);
+  --action-hv-mix: var(--dark-tone);
 }
 
 .hero article h1 {
@@ -250,24 +240,10 @@ h2 {
   font-size: 3rem;
 }
 
-.hero article a {
-  padding: 1rem;
-
-  border-radius: 0.5rem;
-
-  color: var(--text-in-color);
-  background-color: var(--accent1-color);
-
-  font-weight: bold;
-}
-
-.hero article a:hover {
-  background-color: color-mix(in srgb, var(--accent1-color), var(--dark-tone));
-}
-
 /* Genre List */
 #list,
-#watchlist {
+#watchlist,
+#overview {
   padding-inline: 1.35rem;
 
   display: flex;
@@ -450,7 +426,12 @@ a:has(.genre):hover img {
 }
 
 /* Watchlist Styles */
-#watchlist ul {
+#watchlist {
+  --border-color: black;
+}
+
+#watchlist ul,
+#overview ul {
   list-style: none;
 
   display: flex;
@@ -467,6 +448,7 @@ a:has(.genre):hover img {
 
   padding: 0.25rem;
 
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   box-shadow: 0 0 3px 1px var(--dark-tone);
 }
@@ -474,6 +456,9 @@ a:has(.genre):hover img {
 .movie img {
   width: calc(var(--poster-width) / var(--divisor-width));
 
+  object-fit: cover;
+
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
 }
 
@@ -486,6 +471,8 @@ a:has(.genre):hover img {
   align-items: center;
 
   padding-block: 0.5rem;
+
+  text-align: center;
 }
 
 .movie p {
@@ -495,12 +482,97 @@ a:has(.genre):hover img {
   justify-content: space-evenly;
 }
 
+#overview .movie {
+  padding: 0;
+  border-radius: 0.5rem 0 0 0;
+}
+
+#overview .movie img {
+  height: 100px;
+  object-fit: cover;
+  object-position: top;
+
+  border-radius: 0.5rem 0 0 0;
+}
+
+#overview .movie div {
+  justify-content: center;
+}
+
 .void-list {
   font-family: var(--title-header-font);
   font-weight: bold;
   font-size: x-large;
 
   color: color-mix(in srgb, var(--dark-tone), var(--accent3-color));
+}
+
+/* Watchlist Preview Styles */
+.home #overview {
+  color: var(--text-in-color);
+  background-color: color-mix(in srgb, var(--primary-color), black);
+
+  border-left: 5px solid var(--accent3-color);
+
+  --border-color: var(--accent3-color);
+}
+
+#overview {
+  width: 100%;
+  max-width: 300px;
+  height: 100%;
+  max-height: 100vh;
+
+  margin-inline: auto 0;
+  padding-block: 2rem 1rem;
+
+  justify-content: space-between;
+  gap: 1rem;
+
+  font-size: initial;
+  border: 0;
+  border-left: 5px solid var(--accent2-color);
+
+  transform: translateX(100%);
+  transition: transform 500ms ease-in-out;
+
+  z-index: 1;
+
+  --border-color: black;
+
+  --action-color: var(--text-in-color);
+  --action-bg-color: var(--accent2-color);
+  --action-hv-mix: orangered;
+}
+
+#overview::backdrop {
+  background-color: color-mix(in srgb, black, transparent);
+  transition: background-color 500ms ease-in-out;
+}
+
+#overview:popover-open {
+  transform: translateX(0);
+}
+
+#overview h3 {
+  font-size: x-large;
+}
+
+#overview ul {
+  flex-grow: 1;
+  overflow-y: scroll;
+  --divisor-width: 3;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#overview .action {
+  justify-self: end;
 }
 
 /* Footer Styles */
