@@ -29,7 +29,7 @@ export default class MovieStorageManager {
   quitFromFavorite(id) {
     const favorites = getLocalStorage(this.favoritesKey) || [];
 
-    const updatedFavorites = favorites.filter((movie) => movie.id.toString() !== id);
+    const updatedFavorites = favorites.filter((movie) => movie.id.toString() !== id.toString());
 
     setLocalStorage(this.favoritesKey, updatedFavorites);
   }
@@ -37,7 +37,7 @@ export default class MovieStorageManager {
   isFavorite(id) {
     const favorites = getLocalStorage(this.favoritesKey) || [];
 
-    return favorites.some((movie) => movie.id.toString() === id);
+    return favorites.some((movie) => movie.id.toString() === id.toString());
   }
 
   addToWatchlist(movie) {
@@ -51,7 +51,7 @@ export default class MovieStorageManager {
   removeFromWatchlist(id) {
     const watchlist = getLocalStorage(this.watchlistKey) || [];
 
-    const updatedWatchlist = watchlist.filter((movie) => movie.id.toString() !== id);
+    const updatedWatchlist = watchlist.filter((movie) => movie.id.toString() !== id.toString());
 
     setLocalStorage(this.watchlistKey, updatedWatchlist);
   }
@@ -59,7 +59,7 @@ export default class MovieStorageManager {
   inWatchlist(id) {
     const watchlist = getLocalStorage(this.watchlistKey) || [];
 
-    return watchlist.some((movie) => movie.id.toString() === id);
+    return watchlist.some((movie) => movie.id.toString() === id.toString());
   }
 
   checkVoidStorage(key) {

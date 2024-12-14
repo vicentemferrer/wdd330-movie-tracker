@@ -1,10 +1,29 @@
 import ExternalServices from './ExternalServices.mjs';
 import MovieStorageManager from './MovieStorageManager.mjs';
-import { loadTemplate, qs, renderWithTemplate, getCYear } from './utils.mjs';
+import {
+  loadTemplate,
+  qs,
+  renderWithTemplate,
+  renderListWithTextTemplate,
+  getCYear
+} from './utils.mjs';
 
-export default class RenderPage {
+const { VITE_TMDB_IMG } = import.meta.env;
+
+function movieWatchlistPreviewCard(movie) {
+  return `
+    <li class="movie">
+      <img src="${VITE_TMDB_IMG}/w300${movie['poster_path']}" alt="${movie.title} poster" loading="lazy">
+      <div>
+        <a href="../movie/?id=${movie.id}"><h4>${movie.title}</h4></a>
+      </div>
+    </li>
+  `;
+}
+
+export default class RenderContent {
   constructor(parentSelector) {
-    if (new.target === RenderPage) {
+    if (new.target === RenderContent) {
       throw new Error('Cannot instantiate RenderPage class.');
     }
 
@@ -16,10 +35,12 @@ export default class RenderPage {
 
   async init({ isDynamic = false, reset = false, title = '' } = {}) {
     if (reset) this.reset();
-    this.loadHeaderFooter();
+    await this.loadHeaderFooter();
     await this.load();
     if (isDynamic) this.renderTitle(title);
-    this.render();
+    await this.render();
+
+    this.#setWatchlistPreview('#overview ul');
   }
 
   async loadHeaderFooter() {
@@ -32,7 +53,7 @@ export default class RenderPage {
       headerTemplate,
       headerElement,
       'afterbegin',
-      this.setWatchlistCounter.bind(this)
+      this.#setWatchlistCounter.bind(this)
     );
     renderWithTemplate(footerTemplate, footerElement);
 
@@ -60,7 +81,7 @@ export default class RenderPage {
     this.parent = qs(selector);
   }
 
-  setWatchlistCounter() {
+  #setWatchlistCounter() {
     const counter = qs('.wl span');
 
     const qty = this.store.getWatchlistQuantity();
@@ -71,5 +92,14 @@ export default class RenderPage {
     } else {
       counter.classList.add('hide');
     }
+  }
+
+  #setWatchlistPreview(selector) {
+    const wlPreview = qs(selector);
+    const wlList = this.store.getWatchlist();
+
+    console.log(wlPreview);
+
+    renderListWithTextTemplate(movieWatchlistPreviewCard, wlPreview, wlList, 'afterbegin', true);
   }
 }

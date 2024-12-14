@@ -64,6 +64,20 @@ export function renderListWithTemplate(template, parent, list) {
   templateList.forEach((element) => parent.appendChild(element));
 }
 
+export function renderListWithTextTemplate(
+  templateFn,
+  parent,
+  list,
+  position = 'afterbegin',
+  clear = false
+) {
+  if (clear) {
+    parent.innerHTML = '';
+  }
+  const templateList = list.map(templateFn);
+  parent.insertAdjacentHTML(position, templateList.join(''));
+}
+
 export function renderWithTemplate(template, parent, position = 'afterbegin', callback, data) {
   parent.insertAdjacentHTML(position, template);
 

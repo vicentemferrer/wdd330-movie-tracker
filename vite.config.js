@@ -12,7 +12,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'src/index.html'),
         movieList: resolve(__dirname, 'src/movie-list/index.html'),
-        movie: resolve(__dirname, 'src/movie/index.html')
+        movie: resolve(__dirname, 'src/movie/index.html'),
+        watchlist: resolve(__dirname, 'src/watchlist/index.html')
       }
     }
   }
